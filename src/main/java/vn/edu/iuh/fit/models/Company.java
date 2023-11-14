@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "company")
 @Data
@@ -23,9 +25,11 @@ public class Company {
     private String phone;
     @Column(name = "web_url")
     private String webUrl;
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "address")
     private Address address;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "company")
+    private List<Job> jobs;
 
     public Company(String about, String email, String password, String comp_name, String phone, String webUrl, Address address) {
         this.about = about;

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import vn.edu.iuh.fit.models.Candidate;
 import vn.edu.iuh.fit.repositories.CandidateRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CandidateService {
     @Autowired
@@ -21,4 +24,15 @@ public class CandidateService {
         return candidateRepository.findAll(pageable);//findFirst.../findTop...
     }
 
+    public Candidate findByEmailAndPassword(String email, String password) {
+        Optional<Candidate> optional = candidateRepository.findByEmailAndPassword(email, password);
+        if(optional.isEmpty()){
+            throw new RuntimeException("Candidate not found");
+        }
+        return optional.get();
+    }
+
+    public List<Candidate> search(String keyword) {
+        return candidateRepository.search(keyword);
+    }
 }

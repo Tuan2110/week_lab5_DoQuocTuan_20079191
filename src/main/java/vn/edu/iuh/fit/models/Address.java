@@ -26,6 +26,10 @@ public class Address {
     private String number;
     @Column(length = 7,name = "zipcode")
     private String zipCode;
+    @OneToOne(mappedBy = "address")
+    private Candidate candidate;
+    @OneToOne(mappedBy = "address")
+    private Company company;
 
     public Address(String street, String city, CountryCode country, String number, String zipCode) {
         this.street = street;

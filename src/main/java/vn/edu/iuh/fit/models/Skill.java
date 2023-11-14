@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import vn.edu.iuh.fit.enums.SkillType;
 
+import java.util.List;
+import java.util.Objects;
+
 @Entity
 @Table(name = "skill")
 @Data
@@ -21,11 +24,26 @@ public class Skill {
     @Column(name = "skill_name",length = 150)
     private String skillName;
     private SkillType type;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "skill",fetch = FetchType.EAGER)
+    private List<JobSkill> jobSkills;
 
     public Skill(String skillDescription, String skillName, SkillType type) {
         this.skillDescription = skillDescription;
         this.skillName = skillName;
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Skill skill = (Skill) o;
+        return id == skill.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public Skill(long id) {

@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "job")
 @Data
@@ -23,10 +26,19 @@ public class Job {
     @ManyToOne
     @JoinColumn(name = "company")
     private Company company;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "job")
+    private List<JobSkill> jobSkills = new ArrayList<>();
 
     public Job(String jobDesc, String jobName, Company company) {
         this.jobDesc = jobDesc;
         this.jobName = jobName;
         this.company = company;
+    }
+
+    public Job(String jobDesc, String jobName, Company company, List<JobSkill> jobSkills) {
+        this.jobDesc = jobDesc;
+        this.jobName = jobName;
+        this.company = company;
+        this.jobSkills = jobSkills;
     }
 }

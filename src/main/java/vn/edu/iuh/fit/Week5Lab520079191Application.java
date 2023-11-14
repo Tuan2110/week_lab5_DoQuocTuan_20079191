@@ -11,8 +11,10 @@ import vn.edu.iuh.fit.enums.SkillLevel;
 import vn.edu.iuh.fit.enums.SkillType;
 import vn.edu.iuh.fit.models.*;
 import vn.edu.iuh.fit.repositories.*;
+import vn.edu.iuh.fit.services.JobService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 
 @SpringBootApplication

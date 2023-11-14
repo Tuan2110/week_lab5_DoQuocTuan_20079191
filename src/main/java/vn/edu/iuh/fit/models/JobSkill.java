@@ -27,4 +27,9 @@ public class JobSkill {
     @JoinColumn(name = "skill_id")
     private Skill skill;
 
+    public JobSkill(String moreInfos, SkillLevel skillLevel, Skill skill) {
+        this.moreInfos = moreInfos;
+        this.skillLevel = skillLevel;
+        this.skill = skill;
+    }
 }

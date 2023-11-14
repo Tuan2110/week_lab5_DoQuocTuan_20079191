@@ -1,11 +1,13 @@
 package vn.edu.iuh.fit.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "candidate")
@@ -25,9 +27,13 @@ public class Candidate {
     private String fullName;
     @Column(length = 15,unique = true)
     private String phone;
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address")
     private Address address;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "candidate",fetch = FetchType.EAGER)
+    private List<CandidateSkill> candidateSkills;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "candidate")
+    private List<Experience> experiences;
 
     public Candidate(LocalDate dob, String email, String password, String fullName, String phone, Address address) {
         this.dob = dob;
@@ -37,7 +43,6 @@ public class Candidate {
         this.phone = phone;
         this.address = address;
     }
-
     public Candidate(long id) {
         this.id = id;
     }

@@ -48,7 +48,7 @@ C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             </tbody>
         </table>
         <span th:each="count : ${pageNumbers}">
-            <a th:href="@{/candidates(size=10,page=${count})}" th:text="${count}"></a>
+            <a th:href="@{/templates/candidate(size=10,page=${count})}" th:text="${count}"></a>
         </span>
     </div>
 </div>
